@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\Pro_image;
+use App\Models\Related_product;
 class ProductController extends Controller
 {
     public function create()
@@ -70,6 +72,14 @@ public function update(Request $request,$id)
     $data=Product::find($id);
     $data->delete();
     return redirect()->route('products')->with('message',"Data Delete Successfully!");
+}
+//get Product Page
+public function getProductPage($id){
+
+    $data=Product::find($id);
+//  dd($data);
+
+    return view('welcome.productview',compact('data'));
 }
 
 }  

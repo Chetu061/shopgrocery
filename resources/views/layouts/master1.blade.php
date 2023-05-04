@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="ahttps://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+    <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
       <header class="site-navbar" role="banner">
       <div class="site-navbar-top">
         <div class="container">
@@ -34,15 +34,16 @@
                   <li><a href="{{route('welcome.userprofile')}}"><span class="icon icon-person">
                     </span></a></li>
                    <li>
-                    <a href="" class="site-cart">
+                    <a href="{{route('welcome.wishlist')}}" class="site-cart">
                     <span class="icon icon-heart-o"></span>
-                    <span class="count count_wishlist">{{Cart::instance('wishlist')->content()->count()}}</span>
+                    <span class="count count_wishlist">
+                       {{Cart::instance('wishlist')->content()->count()}}</span>
                   {{-- any name give in front of instance --}}
                   </a></li> 
                  
                 
                 <li>
-                  <a href="" class="site-cart">
+                  <a href="{{route('welcome.cart')}}" class="site-cart">
                     <span class="icon icon-shopping_cart"></span>
                     <span class="count total_qty">{{Cart::instance('shopping')->count()}}</span>
                   </a>
@@ -58,14 +59,14 @@
 
           </div>
         </div>
-      </div>  <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+      </div>  <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
 
 
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="{{asset('css/aos.css')}}">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     
   </head>
   <body>
@@ -148,7 +149,7 @@
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
               <h3 class="footer-heading mb-4">Promo</h3>
               <a href="#" class="block-6">
-                <img src="images/123.jpg"  alt="Image placeholder" class="img-fluid rounded mb-4">
+                <img src="{{asset('images/123.jpg')}}"  alt="Image placeholder" class="img-fluid rounded mb-4">
                 <h3 class="font-weight-light  mb-0">Finding Your Perfect Product</h3>
                 <p>Promo from  April 15 to 25, 2023</p>
               </a>
@@ -180,10 +181,11 @@
               <p>
               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               Copyright &copy;<script data-cfasync="false"
-               src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+               src="{{asset('/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}">
               </script><script>document.write(new Date().getFullYear());</script> 
               All rights reserved | This template is made with
-               <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" 
+               <i class="icon-heart" aria-hidden="true"></i> by 
+               <a href="https://colorlib.com" target="_blank" 
                class="text-primary">Priti Malode</a>
               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               </p>
@@ -194,15 +196,15 @@
       </footer>
     </div>
   
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/aos.js"></script>
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('js/jquery-ui.js')}}"></script>
+    <script src="{{asset('js/popper.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('js/aos.js')}}"></script>
   
-    <script src="js/main.js"></script>
+    <script src="{{asset('js/main.js')}}"></script>
       
     </body>
   </html>

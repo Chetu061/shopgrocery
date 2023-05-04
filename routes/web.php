@@ -13,6 +13,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserprofileController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutFrontController;
 
 
 
@@ -125,10 +126,14 @@ Route::get('home',[WelcomeController::class,'home'])->name('welcome.home');
 Route::get('contact',[WelcomeController::class,'contact'])->name('welcome.contact');
 Route::get('about',[WelcomeController::class,'about'])->name('welcome.about');
 Route::get('shop',[WelcomeController::class,'shop'])->name('welcome.shop');
+//used route for cart file
 Route::get('cart',[WelcomeController::class,'cart'])->name('welcome.cart');
 Route::get('checkout',[WelcomeController::class,'checkout'])->name('welcome.checkout');
 Route::get('thankyou',[WelcomeController::class,'thankyou'])->name('welcome.thankyou');
 Route::get('shopsingle',[WelcomeController::class,'shopsingle'])->name('welcome.shopsingle');
+// for wishlist record
+Route::get('wishlist',[WelcomeController::class,'wishlist'])->name('welcome.wishlist');
+
 
 Route::get('admin',[WelcomeController::class,'admin'])->name('welcome.admin');
 
@@ -144,3 +149,9 @@ Route::get('add_to_wishlist/{id}', [CartController::class, 'addToWishlist'])->na
 Route::get('add_to_cart/{id}', [CartController::class, 'AddToCart'])->name('frontend.add_to_cart');
 Route::get('count_wishlist', [CartController::class, 'countWishlist'])->name('frontend.countWishlist');
 Route::get('viewcart_data', [CartController::class, 'getViewCartData'])->name('frontend.getViewCartData');
+
+Route::get('remove_to_cart/{rowid}', [CartController::class, 'RemoveToCart'])->name('frontend.remove_to_cart');
+Route::get('remove_to_wishlist/{rowid}', [CartController::class, 'RemoveToWishlist'])->name('frontend.remove_to_wishlist');
+Route::get('productview/{id}',[ProductController::class,'getProductPage'])->name('welcome.productview');
+//for store shipping data from cart
+Route::post('make_order/store',[CheckoutFrontController::class,'LoadMakeOrder'])->name('make_order.store');

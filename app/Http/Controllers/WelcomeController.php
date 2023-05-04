@@ -7,7 +7,7 @@ use App\Models\Welcome;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cms;
-
+use Cart;
 class WelcomeController extends Controller
 {
     public function welcome()
@@ -42,11 +42,7 @@ return view('welcome',compact('products','latest','category'));
         $category=Category::all();
         return view('welcome.shop',compact('category','products'));
     }
-    public function cart()
-    {
-        return view('welcome.cart');
-
-    }
+    
     public function checkout()
     {
         return view('welcome.checkout');
@@ -67,7 +63,18 @@ return view('welcome',compact('products','latest','category'));
         return view('welcome.userprofile');
 
     }
-    
+    public function cart()
+    { $data = Cart::instance('shopping')->content();
+    // dd($data);
+        return view('welcome.cart',compact('data'));
+
+    }
+    public function wishlist()
+    {   
+        $wish = Cart::instance('wishlist')->content();
+    // dd($wish);
+        return view('welcome.wishlist',compact('wish'));
+    }
 }
 
 

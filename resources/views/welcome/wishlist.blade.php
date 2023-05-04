@@ -1,106 +1,94 @@
-@extends('layouts.master')
+
+@extends('layouts.master1')
 @section('content')
 
-<div class="container-fluid">
-  <div class="row mb-2">
-    <div class="col-sm-6">
-      <h1 class="m-0">Category</h1>
-    </div><!-- /.col -->
-    <div class="col-sm-6">
-      <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Category </li>
-      </ol>
-    </div><!-- /.col -->
-  </div><!-- /.row -->
-</div>
-     <!-- Main content -->
-     <section class="content">
-      <div class="container-fluid">
+
+    <div class="bg-light py-3">
+      <div class="container">
         <div class="row">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Category Management</h3>
-              </div>
-               <div class="card-header">
-                <h3 class="card-title"><a href="">
-                  <button type="button" class="btn btn-primary btn-sm">Add </button> </h3></a>
-               
-              </div> 
-              <!-- /.card-header -->
-              <div class="card-body">
-               
-                @if(session()->has('message'))
-                 <div class="alert alert-success">
-                  {{session()->get ('message')}}
-                 </div>
-                    @endif
-                  
-                  
-                    
-
-                <table class="table table-bordered table-hover" id="dataTable">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">ID</th>
-                      <th style="width: 20px">image</th>
-                      <th style="width:10px">product</th>
-                      <th style="width: 30px">price</th>
-                      <th style="width: 40px">quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    
-                      @foreach($wish as $d)
-                      <tr>
-                        
-                         <td> {{$d->id}}</td>
-                     <td>
-                          <img src="{{asset('uploads/'.$d->image)}}"
-                         width="50px"
-                         height="50px"alt="not image"></td>
-                         <td>{{$d->product}}</td>
-                         <td>{{$d->price}}</td>
-                         <td>{{$d->quantity}}</td>
-
-                       
-                         <td> 
-                     
-                           
-                            <button type="button" class="btn btn-danger">
-                              <a href="">View</a></button>
-                  </td>
-                  
-                  
-                  </tr>
-                      @endforeach
-                    
-                       
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-              
-            </div>
-</div>
+          <div class="col-md-12 mb-0"><a href="index.html">Home</a> 
+            <span class="mx-2 mb-0">/</span> <strong class="text-black">Cart</strong></div>
+        </div>
       </div>
-      </div><!-- /.container-fluid -->
-    </section>
-  
-  @endsection
-  {{-- datatable code --}}
-  @push('scripts')
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js">
-  </script>
-  <script>
-  $(document).ready(function()
-  {
+    </div>
+    
 
-    $('#dataTable').DataTable({
-      "pageLength" :5
-  });//dataTable is id of <table>
-  });
-  </script>
-   @endpush
+    <div class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <form class="col-md-12" >
+            <div class="site-blocks-table">
+              @if(session()->has('message'))
+<div class="alert alert-success">
+ {{session()->get ('message')}}
+</div>
+   @endif
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="product-thumbnail">Image</th>
+                    <th class="product-name">Product</th>
+                    <th class="product-price">SoldBy</th>
+                    <th class="product-remove">Quantity</th>
+
+                    <th class="product-remove">Price</th>
+                     <th class="product-price">Action</th>
+                   
+              
+                  </tr>
+                </thead>
+                <tbody>
+                  {{-- for wishlist file --}}
+                  @foreach($wish as $d)
+                  {{-- @dd($d) --}}
+                  <?php
+                  $product=\App\Models\Product::find($d->id);
+                  // @dd($product)
+                  ?>
+            
+                  <tr>
+                    <td class="product-thumbnail">
+                      <img src="{{asset('uploads/'.$product->image)}}" alt="" 
+                      width="50px" height="49px" alt="Image" class="img-fluid">
+                    </td>
+                    <td class="product-name">
+                      <h2 class="h5 text-black">{{$product->title}}</h2>
+                    </td>
+                    <td>priti</td>
+                    <td>2</td>
+                    <td>{{$product->sale_price}}</td>
+                    <td>
+                      
+                      <a class="pro-remove" data-id="{{ $d->rowId }}"
+                        id="removetoviewcart_{{ $product->id }}"
+                         href="{{route('welcome.productview',$product->id)}}">
+                        <button class="btn btn-outline-primary " type="button">View</button></a>
+                       
+                   
+                        
+                        
+                          <a class="pro-remove" data-id="{{ $d->rowId }}"
+                            id="removetowishlist_{{ $product->id }}"
+                             href="{{route('frontend.remove_to_wishlist',$d->rowId)}}" >
+                             <button type="submit"class="btn  btn-alert btn-sm">Remove</a></td>
+                            </button>
+                      </div>
+                    </div>
+                    </td>
+                  
+                   
+                  </tr>
+                 
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+
+        
+      </div>
+    </div>
+
+    @endsection
+  

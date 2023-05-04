@@ -130,7 +130,8 @@
                 <a class="addtowishlist" data-id="{{ $product->id }}" >
                   <span class="icon icon-heart-o"></span></a>
                 
-                   
+                 
+                     <i class="bi bi-eye"></i>
                     
                   </div>
                 </div>
@@ -265,4 +266,106 @@ success: function (data) {
 }
 });
 }
+
+function onRemoveToCart(id) {
+		var rowid = $("#removetocart_"+id).data('id');
+	
+		$.ajax({
+			type : 'GET',
+			url: base_url + '/remove_to_cart/'+rowid,
+			dataType:"json",
+			success: function (response) {
+				
+				var msgType = response.msgType;
+				var msg = response.msg;
+	
+				if (msgType == "success") {
+					onSuccessMsg(msg);
+          return "data remove successfully"
+				} else {
+					onErrorMsg(msg);
+				}
+				
+				onViewCart();
+			}
+		});
+	}
+
+  function onRemoveToWishlist(id) {
+		var rowid = $("#removetowishlist_"+id).data('id');
+	
+		$.ajax({
+			type : 'GET',
+			url: base_url + '/remove_to_wishlist/'+rowid,
+			dataType:"json",
+			success: function (response) {
+				
+				var msgType = response.msgType;
+				var msg = response.msg;
+	
+				if (msgType == "success") {
+					onSuccessMsg(msg);
+          return "data remove successfully"
+				} else {
+					onErrorMsg(msg);
+				}
+				
+				onViewCart();
+			}
+		});
+	}
+
+  $.ajax({
+		type : 'POST',
+		url: base_url + '/make_order/store',
+		data: $('#checkout_formid').serialize(),
+		// beforeSend: function() {
+		// 	$('.checkout_btn').html('<span class="spinner-border spinner-border-sm"></span> Please Wait...');
+		// },
+		success: function (response) {		
+			var msgType = response.msgType;
+			var msg = response.msg;
+
+			// if (msgType == "success") {
+			// 	$("#checkout_formid").find('span.error-text').text('');
+				
+			// 	//Stripe
+			// 	if(payment_method == 3){
+			// 		if(isenable_stripe == 1){
+			// 			if(response.intent != ''){
+			// 				onConfirmPayment(response.intent, msg);
+			// 			}
+			// 		}
+				
+			// 	//Paypal
+			// 	}else if(payment_method == 4){
+			// 		if(response.intent != ''){
+			// 			window.location.href = response.intent;
+			// 		}
+				
+			// 	//Mollie
+			// 	}else if(payment_method == 6){
+			// 		if(response.intent != ''){
+			// 			window.location.href = response.intent;
+			// 		}
+			// 	}else{
+			// 		//onSuccessMsg(msg);
+			// 		window.location.href = base_url + '/thank';
+			// 	}
+
+			// // } else {
+			// // 	$.each(msg, function(prefix, val){
+			// // 		if(prefix == 'oneError'){
+			// // 			onErrorMsg(val[0]);
+			// // 		}else{
+			// // 			$('span.'+prefix+'_error').text(val[0]);
+			// // 		}
+			// // 	});
+			// // }
+			
+			// $('.checkout_btn').html(checkout_btn);
+		}
+	});
+
+
 </script>
