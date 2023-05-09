@@ -51,13 +51,13 @@
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="{{route('welcome.shopsingle')}}"><img src="{{asset('uploads/'.$prod->image)}}"
+                    <a href="{{route('welcome.productview',$prod->id)}}"><img src="{{asset('uploads/'.$prod->image)}}"
          width="250px" height="217.14px" alt="Image placeholder" class=""></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="{{route('welcome.shopsingle')}}">{{$prod->title}}</a></h3>
+                    <h3><a href="{{route('welcome.productview',$prod->id)}}">{{$prod->title}}</a></h3>
                     <p class="mb-0">{{$prod->description}}</p>
-                    <p class="text-primary font-weight-bold">Rs.50</p>
+                    <p class="text-primary font-weight-bold">{{$prod->sale_price}}</p>
                   </div>
                 </div>
               </div>
@@ -222,10 +222,12 @@
 
 
             </div>
-            <div class="row" data-aos="fade-up">
+          /   <div class="row" data-aos="fade-up"> 
               <div class="col-md-12 text-center">
                 <div class="">
-                  <ul class="active">{{$products->links()}}
+                  <ul class="active">
+                    
+                  
                    {{-- <li><a href="#">&lt;</a></li> 
                     <li class="active"></li> 
                      <li><a href="#">2</a></li>
@@ -237,7 +239,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> 
 
           <div class="col-md-3 order-1 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
@@ -312,22 +314,24 @@
                     <h2>Categories</h2>
                   </div>
                 </div>
-                <div class="row">
-                  @foreach($category as $cate)
-                  <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-                    <a class="block-2-item" href="#">
-                      <figure class="image">
-                        <img src="{{asset('uploads/'.$cate->image)}}" alt="" class="img-fluid">
-                      </figure>
-                      <div class="text">
-                        <span class="text-uppercase">Collections</span>
-                        <h3>{{$cate->title}}</h3>
-                      
+                <div class="site-section site-blocks-2">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      @foreach($category as $cate)
+                      <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
+                        <a class="block-2-item" href="">
+                          <figure class="image">
+                            <img src="{{asset('uploads/'.$cate->image)}}" alt="" width="250px" height="250px" >
+                          </figure>
+                          <div class="text">
+                            <span class="text-uppercase">Collections</span>
+                            <h3>{{$cate->title}}</h3>
+                             
+                            
+                          </div>
+                          
+                        </a>
                       </div>
-                     
-                    </a>
-                    
-                  </div>
                   @endforeach
                   
                   {{-- <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
@@ -366,3 +370,4 @@
     </div>
 
     @endsection
+   

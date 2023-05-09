@@ -39,9 +39,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
@@ -155,3 +155,7 @@ Route::get('remove_to_wishlist/{rowid}', [CartController::class, 'RemoveToWishli
 Route::get('productview/{id}',[ProductController::class,'getProductPage'])->name('welcome.productview');
 //for store shipping data from cart
 Route::post('make_order/store',[CheckoutFrontController::class,'LoadMakeOrder'])->name('make_order.store');
+//sign in
+Route::get('/user/my-dashboard', [MyDashboardController::class, 'LoadMyDashboard'])->name('welcome.my-dashboard')->middleware('auth');
+
+

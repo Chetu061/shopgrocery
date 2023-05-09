@@ -28,7 +28,7 @@ class CreateOrdermastersTable extends Migration
             $table->string('address');
             $table->string('state');
             $table->integer('zip_code');
-            $table->integer('email');
+           
             $table->integer('phone');
             $table->string('comments');
          $table->timestamps();

@@ -4,7 +4,9 @@
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <a href="cart.html">Cart</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Checkout</strong></div>
+          <div class="col-md-12 mb-0"><a href="index.html">Home</a>
+             <span class="mx-2 mb-0">/</span> <a href="cart.html">Cart</a> 
+             <span class="mx-2 mb-0">/</span> <strong class="text-black">Checkout</strong></div>
         </div>
       </div>
     </div>
@@ -33,10 +35,11 @@
             </div>
             @endif
             <form action="{{route('make_order.store')}}" method="post" id="checkout_formid">
+              @csrf
               <div class="form-group">
-                <label for="c_country" class="text-black">
+                <label for="country" class="text-black">
                   Country <span class="text-danger">*</span></label>
-                <select id="c_country" class="form-control">
+                <select id="country" class="form-control"  name="country">
                   <option value="1">Select a country</option>    
                   <option value="2">bangladesh</option>    
                   <option value="3">India</option>    
@@ -50,27 +53,31 @@
               </div>
               <div class="form-group row">
                 <div class="col-md-6">
-                  <label for="c_fname" class="text-black">First Name
+                  <label for="fname" class="text-black">First Name
                      <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="fname"value=" {{old('fname')}}"name="fname">
+                  <input type="text" 
+                   class="form-control" id="fname"value=" {{old('fname')}}"name="fname">
                 </div>
+
                 <div class="col-md-6">
-                  <label for="c_lname" class="text-black">Last Name 
+                  <label for="lname" class="text-black">Last Name 
                     <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" value=" {{old('lname')}}"id="lname" name="lname">
+                  <input type="text" class="form-control"value=" {{old('lname')}}"id="lname" 
+                  name="lname">
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <label for="c_companyname" class="text-black">Company Name </label>
-                  <input type="text" class="form-control" id="companyname"value=" {{old('companyname')}}" name="companyname">
+                  <label for="companyname" class="text-black">Company Name </label>
+                  <input type="text" class="form-control" id="companyname"
+                  value=" {{old('companyname')}}" name="companyname">
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <label for="c_address" class="text-black">Address 
+                  <label for="address" class="text-black">Address 
                     <span class="text-danger">*</span></label>
                   <input type="textarea" class="form-control" id="address"value=" {{old('address')}}" name="address"
                    placeholder="Street address">
@@ -98,15 +105,15 @@
               <div class="form-group row mb-5">
                 <div class="col-md-6">
                   <label for="email" class="text-black">Email Address <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="email" name="email"value=" {{old('email')}}">
+                  <input type="email" class="form-control" id="email" name="email"value=" {{old('email')}}">
                 </div>
                 <div class="col-md-6">
                   <label for="phone" class="text-black">Phone <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="phone" value=" {{old('phone')}}"
-                  name="phone" placeholder="Phone Number">
+                  name="phone" >
                 </div>
               </div>
-
+{{-- 
               <div class="form-group">
                 <label for="c_create_account" class="text-black" data-toggle="collapse" href="#create_an_account" role="button" aria-expanded="false" aria-controls="create_an_account"><input type="checkbox" value="1" id="c_create_account"> Create an account?</label>
                 <div class="collapse" id="create_an_account">
@@ -119,21 +126,31 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
 
 
               <div class="form-group">
-                <label for="c_order_notes" class="text-black">Order Notes</label>
-                <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder="Write your notes here..."></textarea>
+                <label for="comments" class="text-black">Order Notes</label>
+                <textarea name="comments" id="comments" cols="30" rows="5" 
+                class="form-control" placeholder="Write your notes here..."></textarea>
               </div>
 
-              <button class="btn btn-primary">Submit</button>
+              <h4>Payment Method</h4>
+              <label class="checkbox-title">
+											<input id="payment_method_cod" name="status" type="radio" 
+											value="1"><img src="{{ asset('images/cash_on_delivery.png')}}" 
+											alt="Cash on Delivery" />
+									<br>
+											<input id="payment_method_bank" name="status" type="radio" value="2">
+											<img src="{{ asset('images/bank_transfer.png')}}" alt="Bank Transfer" />
+										</label><br>
+<button class="btn btn-primary checkout_btn">Submit</button>
             </div>
           </div>
        
-          {{-- <div class="col-md-6">
+          <div class="col-md-6">
 
-            <div class="row mb-5">
+            {{-- <div class="row mb-5">
               <div class="col-md-12">
                 <h2 class="h3 mb-3 text-black">Coupon Code</h2>
                 <div class="p-3 p-lg-5 border">
@@ -148,7 +165,7 @@
 
                 </div>
               </div>
-            </div>
+            </div> --}}
               </form> 
             <div class="row mb-5">
               <div class="col-md-12">
@@ -221,7 +238,7 @@
               </div>
             </div>
 
-          </div> --}}
+          </div>
         </div>
     
       </div>

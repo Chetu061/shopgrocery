@@ -50,7 +50,7 @@
                @foreach ($data as $d)
 								@php
 									// Cart::instance('shopping')->update($d->rowId, $d->qty);
-                  $data = Cart::instance('shopping')->get($d->rowId);
+                  // $data = Cart::instance('shopping')->get($d->rowId);
                   //only one add
                 // dd($data);
                 // $pro_price = $d->sale_price;
@@ -94,7 +94,8 @@
                     </td> --}}
                     <td class="text-center pro-total-price-w"
 									 data-title="{{ __('Total') }}:">
-										<span class="pro-total-price">{{ $data->price * $data->qty }}</span>
+										<span class="pro-total-price"></span>
+                      {{-- {{ $data->sale_price * $data->qty }}</span> --}}
 									</td>
                   
                     <td class="text-center pro-remove-w" data-title="Remove:">

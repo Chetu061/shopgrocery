@@ -5,7 +5,7 @@
 	<div class="breadcrumb-section">
 		<div class="container">
 			<div class="row align-items-center">
-				<div class="col-lg-6">
+				<div class="col-lg-11">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
@@ -14,7 +14,7 @@
 							aria-current="page">{{ $data->title }}</li>
 						</ol>
 					</nav>
-				<div class="col-lg-6">
+				<div class="col-lg-1">
 					<div class="page-title">
 						<h1>{{ $data->title }}</h1>
 					
@@ -110,11 +110,11 @@
 							
 						</div>
 						<div class="pr_buy_cart">
-							<a  class="site-cart" id="quantity" data-id="{{ $data->id }}">
+							<a href="" class="site-cart" id="quantity" data-id="{{ $data->id }}">
 								{{-- below class give and id also ,data id="product->id" --}}
 								<span class="icon icon-shopping_cart"></span>
 		  
-						  <a class="addtowishlist" data-id="{{ $data->id }}" >
+						  <a href=""class="addtowishlist" data-id="{{ $data->id }}" >
 							<span class="icon icon-heart-o"></span></a>
 						  
 							{{-- <a class="btn btn-primary theme-btn cart product_addtocart" data-id="{{ $data->id }}" data-stockqty="{{ $data->is_stock == 1 ? $data->stock_qty : 999 }}" href="javascript:void(0);">{{ __('Add To Cart') }}</a>--}}
@@ -170,4 +170,83 @@
 
 	<!-- /Popular Products/ -->
 </main>
+
 @endsection
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script>
+  
+    	$(document).on("click", ".addtowishlist", function(event) {
+
+		event.preventDefault();
+        const base_url = "http://127.0.0.1:85";
+		const id = $(this).data('id');
+        //  alert('hrllo');
+//  console.log("success");
+
+		$.ajax({
+			type : 'GET',
+            url: '/add_to_wishlist/' + id,
+			dataType:"json",
+
+			success: function (response) {
+				var msgType = response.msgType;
+				var msg = response.msg;
+
+				if (msgType == "success") {
+					return "Data added successfully"
+				} else {
+					onErrorMsg(msg);
+				}
+				onWishlist();
+			}
+		});
+    });
+
+
+    $(document).on("click", ".site-cart", function(event) { //classname
+		event.preventDefault();
+
+		const qty = $("#quantity").val();//idname
+		const id = $(this).data('id');
+  //  alert('hello');
+//  console.log("success");
+	
+
+		$.ajax({
+			type : 'GET',
+			url: '/add_to_cart/' + id,
+			dataType:"json",
+
+			success: function (response) {
+				var msgType = response.msgType;
+				var msg = response.msg;
+  // alert('msg');
+				if (msgType == "success") {
+					onSuccessMsg(msg);
+				} else {
+					onErrorMsg(msg);
+				}
+				onViewCart();
+			}
+		});
+    });
+
+function onWishlist() {
+
+$.ajax({
+type : 'GET',
+url: base_url + '/count_wishlist/',
+dataType:"json",
+success: function (data) {
+
+  $(".count_wishlist").text(data);
+
+}
+});
+}
+
+
+</script>

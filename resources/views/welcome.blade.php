@@ -3,8 +3,8 @@
 
     <div class="site-blocks-cover" style="background-image: url(images/12.jpg);" data-aos="fade">
       <div class="container">
-        <div class="row align-items-start align-items-md-center justify-content-end">
-          <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
+        <div class="row align-items-start color-red align-items-md-center justify-content-end">
+          <div class="col-md-5 text-center text-md-left pt-4 pt-md-0">
             <h1 class="mb-2">Finding Your Perfect Product</h1>
             <div class="intro-text text-center text-md-left">
               <p class="mb-4">An ecommerce website is a digital platform
@@ -12,7 +12,7 @@
                  These websites provide a convenient and easy way for customers to shop 
                  from the comfort of their own homes, without the need to physically visit
                   a brick-and-mortar store.<p>
-    <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+    <a href="{{route('welcome.shop')}}" class="btn btn-sm btn-primary">Shop Now</a>
               </p>
             </div>
           </div>
@@ -60,7 +60,7 @@
         <div class="row justify-content-center">
           @foreach($category as $cate)
           <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-            <a class="block-2-item" href="#">
+            <a class="block-2-item" href="">
               <figure class="image">
                 <img src="{{asset('uploads/'.$cate->image)}}" alt="" width="250px" height="250px" >
               </figure>
@@ -114,11 +114,12 @@
               <div class="item">
                 <div class="block-4 text-center">
                   <figure class="block-4-image">
-                    <img src="{{asset('uploads/'.$product->image)}}"
-                    width="320px" height="217.14px" alt="Image placeholder" >
+                    <a href="{{route('welcome.productview',$product->id)}}"> 
+                      <img src="{{asset('uploads/'.$product->image)}}"
+                    width="320px" height="217.14px" alt="Image placeholder" ></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="#">{{$product->title}}</a></h3>
+                    <h3><a href="{{route('welcome.productview',$product->id)}}">{{$product->title}}</a></h3>
                     <p class="mb-0">{!!$product->description!!}</p>
                     <p class="text-primary font-weight-bold">{{$product->sale_price}}</p>
                     {{-- changes --}}
@@ -129,9 +130,10 @@
 
                 <a class="addtowishlist" data-id="{{ $product->id }}" >
                   <span class="icon icon-heart-o"></span></a>
-                
-                 
-                     <i class="bi bi-eye"></i>
+
+                <a href="{{route('welcome.productview',$product->id)}}">
+                  <span class="icon icon-eye "></span></a>
+                    
                     
                   </div>
                 </div>
@@ -315,57 +317,6 @@ function onRemoveToCart(id) {
 		});
 	}
 
-  $.ajax({
-		type : 'POST',
-		url: base_url + '/make_order/store',
-		data: $('#checkout_formid').serialize(),
-		// beforeSend: function() {
-		// 	$('.checkout_btn').html('<span class="spinner-border spinner-border-sm"></span> Please Wait...');
-		// },
-		success: function (response) {		
-			var msgType = response.msgType;
-			var msg = response.msg;
-
-			// if (msgType == "success") {
-			// 	$("#checkout_formid").find('span.error-text').text('');
-				
-			// 	//Stripe
-			// 	if(payment_method == 3){
-			// 		if(isenable_stripe == 1){
-			// 			if(response.intent != ''){
-			// 				onConfirmPayment(response.intent, msg);
-			// 			}
-			// 		}
-				
-			// 	//Paypal
-			// 	}else if(payment_method == 4){
-			// 		if(response.intent != ''){
-			// 			window.location.href = response.intent;
-			// 		}
-				
-			// 	//Mollie
-			// 	}else if(payment_method == 6){
-			// 		if(response.intent != ''){
-			// 			window.location.href = response.intent;
-			// 		}
-			// 	}else{
-			// 		//onSuccessMsg(msg);
-			// 		window.location.href = base_url + '/thank';
-			// 	}
-
-			// // } else {
-			// // 	$.each(msg, function(prefix, val){
-			// // 		if(prefix == 'oneError'){
-			// // 			onErrorMsg(val[0]);
-			// // 		}else{
-			// // 			$('span.'+prefix+'_error').text(val[0]);
-			// // 		}
-			// // 	});
-			// // }
-			
-			// $('.checkout_btn').html(checkout_btn);
-		}
-	});
-
+  
 
 </script>
